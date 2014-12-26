@@ -67,9 +67,11 @@
     <ClCompile Include="edge.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parameter.cpp" />
+    <ClCompile Include="graph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="edge.h" />
+    <ClInclude Include="graph.h" />
     <ClInclude Include="parameter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

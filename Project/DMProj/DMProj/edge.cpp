@@ -16,7 +16,7 @@ void Edge::init(){
   linked = false;
   weight = 0;
 }
-void Edge::setWeight(int year, int conf, int paper){
+void Edge::calWeight(int year, int conf, int paper){
   linked = true;
   int standYear = pPredictYear;
   weight = weight +  pow(pYear, standYear - year) + pConf*conf + pPaper*paper;
@@ -27,4 +27,11 @@ bool Edge::isLink(){
 }
 double Edge::getWeight(){
   return weight;
+}
+void Edge::setWeight(double n_weight){
+  weight = n_weight;
+}
+
+void Edge::setLink(bool link){
+  linked = link;
 }

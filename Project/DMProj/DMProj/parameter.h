@@ -1,5 +1,6 @@
 #include<cstdlib>
 #include<iostream>
+#include<sstream>
 
 using namespace std;
 
@@ -13,5 +14,13 @@ extern double pConf;
 extern double pPaper;
 extern double pThreshold;
 extern int pBFSlimit;
+
+
+
+extern string d2str(double val);
+extern string i2str(int val);
+extern double str2d(string val);
+extern int str2i(string val);
+
 
 #endif

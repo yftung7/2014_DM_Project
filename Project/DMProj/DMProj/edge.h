@@ -10,7 +10,9 @@ public:
   Edge();
   ~Edge();
   void init();
-  void setWeight(int year,int conf, int paper);
+  void calWeight(int year,int conf, int paper);
+  void setWeight(double n_weight);
+  void setLink(bool link);
   bool isLink();
   double getWeight();
 protected:
