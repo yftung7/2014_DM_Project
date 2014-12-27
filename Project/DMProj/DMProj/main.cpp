@@ -12,6 +12,7 @@ using namespace std;
 Graph graph;
 
 double findPath(int s, int t){
+  cout << graph.getWeight(s, t)<<endl;
   int BFSlimit = pBFSlimit;
   int pathWeight = 0;
   bool * visit = new bool[pNumAuthor];

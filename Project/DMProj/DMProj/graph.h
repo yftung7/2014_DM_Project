@@ -24,7 +24,7 @@ public:
   void setWeight(int i ,int j ,int year, int conf, int paper);
   bool isLink(int i, int j);
   double getWeight(int i , int j);
-  void readData(int i, int j);
+  bool readData(int i, int j);
   void writeData(int i, int j);
   int findNode(int j);
   void refine();

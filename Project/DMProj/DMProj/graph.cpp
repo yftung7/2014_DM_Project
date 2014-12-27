@@ -62,18 +62,21 @@ void Graph::refine(){
 }
 
 
-void Graph::readData(int i , int j){
+bool Graph::readData(int i , int j){
   //refined = false;
   string filename = "data/Graph_" + i2str(i) + ".glist";
   infile.open(filename.c_str());
   Node node;
   nodeList.clear();
+  if (!infile)
+    return false;
   //infile >> refined;
   while (infile >> node.conn){
     infile >> node.weight;
     nodeList.push_back(node);
   }
   infile.close();
+  return true;
 }
 
 void Graph::writeData(int i, int j){
@@ -172,7 +175,8 @@ bool Graph::isLink(int i, int j){
       output = false;
     } // if
 
-    readData(i, j);
+    if(readData(i, j)==false)
+      return false;
 
     if (row == i&&col == j)
       tIndex = lastIndex;
@@ -222,7 +226,8 @@ double Graph::getWeight( int i , int j){
       output = false;
     } // if
 
-    readData(i, j);
+    if (readData(i, j) == false)
+      return 0;
     if (row == i&&col == j)
       tIndex = lastIndex;
     else {
