@@ -44,6 +44,17 @@ void Graph::flush(){
   writeData(row, col);
 }
 
+void Graph::clear(){
+
+  for (int i = 0; i < pNumAuthor; i++){
+    string filename = "data/Graph_" + i2str(i) + ".glist";
+    outfile.open(filename.c_str());
+    outfile.close();
+  }
+  //outfile << refined << endl;
+
+}
+
 void Graph::refine(){
   if (refined)
     return;
@@ -170,10 +181,7 @@ bool Graph::isLink(int i, int j){
   } // if
   else {
 
-    if (output){
-      writeData(row, col);
-      output = false;
-    } // if
+
 
     if(readData(i, j)==false)
       return false;
@@ -221,10 +229,7 @@ double Graph::getWeight( int i , int j){
   } // if
   else {
 
-    if (output){
-      writeData(row, col);
-      output = false;
-    } // if
+
 
     if (readData(i, j) == false)
       return 0;

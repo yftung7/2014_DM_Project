@@ -12,9 +12,9 @@ using namespace std;
 Graph graph;
 
 double findPath(int s, int t){
-  cout << graph.getWeight(s, t)<<endl;
+  //cout << graph.getWeight(s, t)<<endl;
   int BFSlimit = pBFSlimit;
-  int pathWeight = 0;
+  double pathWeight = 0;
   bool * visit = new bool[pNumAuthor];
   for (int i = 0; i < pNumAuthor; i++){
     visit[i] = false;
@@ -34,27 +34,43 @@ double findPath(int s, int t){
     if (deep[ts] >= BFSlimit)
       break;
     queue.pop_back();
-
+    
+    graph.readData(ts, t);
     vector<Node> tempVec (graph.getVec());
     for (int i = 0; i < tempVec.size(); i++){
+      
+      
       if (!visit[tempVec.at(i).conn]){
-        queue.push_back(tempVec.at(i).conn);
+        
         visit[tempVec.at(i).conn] = true;
         parent[tempVec.at(i).conn] = ts;
         deep[tempVec.at(i).conn] = deep[ts] + 1;
+        
         if (tempVec.at(i).conn == t){
+          
+          //cout << "vec: " << ts << " " << tempVec.at(i).conn << " " << tempVec.at(i).weight << endl;
+          //cout << "ts " << ts << "deep[ts]" << deep[ts] << " deep[t]" << deep[t] << endl;
           visit[t] = false;
           int temp=t;
           double tWeight = 0;
+          if (parent[temp] == s)
+            tWeight += graph.getWeight(temp, parent[temp]);
+          
+          
           while (parent[temp] != s){
+            
             tWeight += graph.getWeight(temp,parent[temp]);
             temp = parent[temp];
           } // while
+          
           pathWeight += tWeight / deep[t];
-        } // if
-      } // if
+        } // if(tempvec)
+        else 
+          queue.push_back(tempVec.at(i).conn);
+      } // if(!visit)
     } // for
 
+   
   } // while
 
 
@@ -66,7 +82,7 @@ int main(int argc, int * argv[]){
 
 
   ifstream infile;
-  infile.open("Ctest.txt");
+  
   int tAuthor1 = 0;
   int tAuthor2 = 0;
   int tYear = 0;
@@ -74,24 +90,12 @@ int main(int argc, int * argv[]){
   int tPaper = 0;
   
   ofstream outfile;
-  string filename;
-
-
-
-  for (int i = 0; i < pNumAuthor; i++){
-    for (int j = 0; j < pNumAuthor / BLOCKSIZE; j = j + BLOCKSIZE){
-      filename = "data/matrix_" + i2str(i) + "_" + i2str(j / BLOCKSIZE)+".matrix";
-      outfile.open(filename.c_str());
-      for (int q = 0; q < pNumAuthor; q++){
-        outfile << 0 << " " << 0 <<endl;
-      } // for
-      outfile.flush();
-      outfile.close();
-    } // for
-  } // for
+  string filename="Cquery.txt";
 
   
- 
+  graph.clear();
+
+  infile.open("Ctest.txt");
   if (!infile)
   {
     cout << "file in.txt not found!" << endl;
@@ -110,13 +114,28 @@ int main(int argc, int * argv[]){
 
 
   graph.flush();
-
+  
   infile.close();
+
+
+  
   infile.open("Cquery.txt");
+  //infile.open(filename.c_str());
+  if (!infile)
+  {
+    cout << "file in.txt not found!" << endl;
+    system("pause");
+    return 0;
+  } // if
+
+
+
+
   //cout << "StratReadQ" << endl;
   while (infile >> tAuthor1){
+    
     infile >> tAuthor2;
-    cout << findPath(tAuthor1, tAuthor2) << endl;
+    cout << "weight " << findPath(tAuthor1, tAuthor2) << endl;
     /*
     if (findPath(tAuthor1,tAuthor2) > pThreshold)
       cout << "Yes" << endl;

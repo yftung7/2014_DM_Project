@@ -29,6 +29,7 @@ public:
   int findNode(int j);
   void refine();
   void flush();
+  void clear();
   vector<Node> getVec();
 protected:
   //Edge edge[50000];
