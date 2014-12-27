@@ -96,7 +96,11 @@ void Graph::setWeight(int i, int j,int year, int conf, int paper){
 
 
   Node tempNode;
+<<<<<<< HEAD
   if (row == i || row==-BLOCKSIZE ){
+=======
+  if (row == i ){
+>>>>>>> c04da8ccf9541372ccbf6b2305546f569aa1f8ec
     if (row == i&&col == j)
       tIndex = lastIndex;
     else {
