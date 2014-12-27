@@ -89,15 +89,16 @@ void Graph::writeData(int i, int j){
 
 void Graph::setWeight(int i, int j,int year, int conf, int paper){
   int tIndex = 0;
-  if (row == i&&col == j)
-    tIndex = lastIndex;
-  else {
-    tIndex = findNode(j);
-    lastIndex = tIndex;
-  } // else
+
 
   Node tempNode;
   if (row == i ){
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       tempNode.conn = j;
       tempNode.weight = pow(pYear, 2010 - year);
@@ -117,6 +118,12 @@ void Graph::setWeight(int i, int j,int year, int conf, int paper){
 
     readData(i, j);
     
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       tempNode.conn = j;
       tempNode.weight = pow(pYear, 2010 - year);
@@ -138,14 +145,15 @@ bool Graph::isLink(int i, int j){
   bool nlink = false;
 
   int tIndex = 0;
-  if (row == i&&col == j)
-    tIndex = lastIndex;
-  else {
-    tIndex = findNode(j);
-    lastIndex = tIndex;
-  } // else
+ 
 
   if (row == i){
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       nlink = false;
     } // if
@@ -162,6 +170,12 @@ bool Graph::isLink(int i, int j){
 
     readData(i, j);
 
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       nlink = false;
     } // if
@@ -181,14 +195,15 @@ double Graph::getWeight( int i , int j){
 
   double nWeight = 0;
   int tIndex = 0;
-  if (row == i&&col == j)
-    tIndex = lastIndex;
-  else {
-    tIndex = findNode(j);
-    lastIndex = tIndex;
-  } // else
+ 
 
   if (row == i){
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       nWeight=0;
     } // if
@@ -204,6 +219,12 @@ double Graph::getWeight( int i , int j){
     } // if
 
     readData(i, j);
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
 
     if (tIndex == -1){
       nWeight = 0;
