@@ -77,7 +77,7 @@ void Graph::readData(int i , int j){
 }
 
 void Graph::writeData(int i, int j){
-  cout << "i " << i << endl;
+  //cout << "i " << i << endl;
   string filename = "data/Graph_" + i2str(i) + ".glist";
   outfile.open(filename.c_str());
   //outfile << refined << endl;
@@ -96,11 +96,7 @@ void Graph::setWeight(int i, int j,int year, int conf, int paper){
 
 
   Node tempNode;
-<<<<<<< HEAD
   if (row == i || row==-BLOCKSIZE ){
-=======
-  if (row == i ){
->>>>>>> c04da8ccf9541372ccbf6b2305546f569aa1f8ec
     if (row == i&&col == j)
       tIndex = lastIndex;
     else {
