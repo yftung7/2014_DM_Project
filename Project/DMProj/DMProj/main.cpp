@@ -88,6 +88,8 @@ int main(int argc, int * argv[]){
       outfile.close();
     } // for
   } // for
+
+  
  
   if (!infile)
   {
@@ -106,6 +108,7 @@ int main(int argc, int * argv[]){
   } // while
 
 
+  graph.flush();
 
   infile.close();
   infile.open("Cquery.txt");

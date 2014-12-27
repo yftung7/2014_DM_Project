@@ -28,6 +28,7 @@ public:
   void writeData(int i, int j);
   int findNode(int j);
   void refine();
+  void flush();
   vector<Node> getVec();
 protected:
   //Edge edge[50000];

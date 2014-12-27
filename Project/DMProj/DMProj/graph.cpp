@@ -40,6 +40,9 @@ int Graph::findNode(int j){
   return -1;
 }
 
+void Graph::flush(){
+  writeData(row, col);
+}
 
 void Graph::refine(){
   if (refined)
@@ -60,12 +63,12 @@ void Graph::refine(){
 
 
 void Graph::readData(int i , int j){
-  refined = false;
+  //refined = false;
   string filename = "data/Graph_" + i2str(i) + ".glist";
   infile.open(filename.c_str());
   Node node;
   nodeList.clear();
-  infile >> refined;
+  //infile >> refined;
   while (infile >> node.conn){
     infile >> node.weight;
     nodeList.push_back(node);
@@ -74,11 +77,12 @@ void Graph::readData(int i , int j){
 }
 
 void Graph::writeData(int i, int j){
+  cout << "i " << i << endl;
   string filename = "data/Graph_" + i2str(i) + ".glist";
   outfile.open(filename.c_str());
-  outfile << refined << endl;
+  //outfile << refined << endl;
   for (int i = 0; i < nodeList.size(); i++){
-    outfile << nodeList.at(i).conn << nodeList.at(i).weight << endl;
+    outfile << nodeList.at(i).conn <<" "<< nodeList.at(i).weight << endl;
   } // for
 
 
@@ -89,15 +93,16 @@ void Graph::writeData(int i, int j){
 
 void Graph::setWeight(int i, int j,int year, int conf, int paper){
   int tIndex = 0;
-  if (row == i&&col == j)
-    tIndex = lastIndex;
-  else {
-    tIndex = findNode(j);
-    lastIndex = tIndex;
-  } // else
+
 
   Node tempNode;
-  if (row == i ){
+  if (row == i || row==-BLOCKSIZE ){
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       tempNode.conn = j;
       tempNode.weight = pow(pYear, 2010 - year);
@@ -111,12 +116,18 @@ void Graph::setWeight(int i, int j,int year, int conf, int paper){
   else {
     
     if (output){
-      writeData(i, j);
+      writeData(row, col);
       output = false;
     } // if
 
     readData(i, j);
     
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       tempNode.conn = j;
       tempNode.weight = pow(pYear, 2010 - year);
@@ -138,14 +149,15 @@ bool Graph::isLink(int i, int j){
   bool nlink = false;
 
   int tIndex = 0;
-  if (row == i&&col == j)
-    tIndex = lastIndex;
-  else {
-    tIndex = findNode(j);
-    lastIndex = tIndex;
-  } // else
+ 
 
   if (row == i){
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       nlink = false;
     } // if
@@ -156,12 +168,18 @@ bool Graph::isLink(int i, int j){
   else {
 
     if (output){
-      writeData(i, j);
+      writeData(row, col);
       output = false;
     } // if
 
     readData(i, j);
 
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       nlink = false;
     } // if
@@ -181,14 +199,15 @@ double Graph::getWeight( int i , int j){
 
   double nWeight = 0;
   int tIndex = 0;
-  if (row == i&&col == j)
-    tIndex = lastIndex;
-  else {
-    tIndex = findNode(j);
-    lastIndex = tIndex;
-  } // else
+ 
 
   if (row == i){
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
     if (tIndex == -1){
       nWeight=0;
     } // if
@@ -199,11 +218,17 @@ double Graph::getWeight( int i , int j){
   else {
 
     if (output){
-      writeData(i, j);
+      writeData(row, col);
       output = false;
     } // if
 
     readData(i, j);
+    if (row == i&&col == j)
+      tIndex = lastIndex;
+    else {
+      tIndex = findNode(j);
+      lastIndex = tIndex;
+    } // else
 
     if (tIndex == -1){
       nWeight = 0;
